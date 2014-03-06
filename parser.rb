@@ -23,9 +23,11 @@ modelname = modelname.gsub(/\*/, "")
 puts
 puts
 puts "#{modelname}"
-puts "=" * 60
 
 model = ModelParser.new.parse(open("https://schema.org/#{modelname}"))
+puts model.delete(:description)
+puts "=" * 60
+puts model.delete(:hierarchy).join " > "
 
 model.map do |model, attrs|
   puts
