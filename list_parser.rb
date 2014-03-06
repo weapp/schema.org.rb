@@ -41,19 +41,19 @@ class ListParser
   end
 
   def post_process
-		@attrs = []
-		@parents = []
+		all_attrs = []
+		parents = []
   	buffer.split("\n")
 	  	.reject{|line| line.gsub(/\=/, '').strip.empty?}
 			.map do |line|
 			  depth, model, attrs = line.split(/:? /,3)
 			  depth = depth.length
 			  attrs = (attrs && attrs.split(/,\s*/))
-			  @attrs = @attrs[0...depth]
-			  @parents = @parents[0...depth]
-			  @attrs[depth] = attrs
-			  @parents[depth] = model
-			  [depth, model, attrs, @parents[0..-1], @attrs]
+			  all_attrs = all_attrs[0...depth]
+			  parents = parents[0...depth]
+			  all_attrs[depth] = attrs
+			  parents[depth] = model
+			  [depth, model, attrs, parents[0..-1], all_attrs]
 			end
   end
 end
