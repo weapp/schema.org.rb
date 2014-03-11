@@ -80,7 +80,8 @@ class ModelParser
             hash[:attributes][last_key] = []
           else
             line[1] = line[1].split(" or ")
-            hash[:attributes][last_key] << line
+            name, types, description = line
+            hash[:attributes][last_key] << {name: name, types: types, description: description}
           end
         end
     end

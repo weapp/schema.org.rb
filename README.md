@@ -56,4 +56,35 @@ TransferAction
 ------------------------------------------------------------
 fromLocation                   Number | Place
 toLocation                     Number | Place
+
+# transfer_action.rb
+class TransferAction < Action
+  attribute :from_location
+  attribute :to_location
+end
+
+# action.rb
+class Action < Thing
+  attribute :agent
+  attribute :end_time
+  attribute :instrument
+  attribute :location
+  attribute :object
+  attribute :participant
+  attribute :result
+  attribute :start_time
+end
+
+# thing.rb
+class Thing
+  include ActiveAttr::Attributes
+
+  attribute :additional_type
+  attribute :alternate_name
+  attribute :description
+  attribute :image
+  attribute :name
+  attribute :same_as
+  attribute :url
+end
 ```
