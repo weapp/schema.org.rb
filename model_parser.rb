@@ -67,21 +67,23 @@ class ModelParser
     hierarchy = self.hierarchy.split("|")[3..-1].reject { |str| str == "&gt;" }
     hash = {
       hierarchy: hierarchy,
-      description: description
+      description: description,
+      attributes: {}
     }
-    return hash if buffer.strip.empty?
-    last_key = nil
-    buffer.split("\n")[2..-1]
-      .map do |line|
-        line = line.split(" | ")
-        if line.length == 1
-          last_key = line.first.split(" ").last
-          hash[last_key] = []
-        else
-          line[1] = line[1].split(" or ")
-          hash[last_key] << line
+    unless buffer.strip.empty?
+      last_key = nil
+      buffer.split("\n")[2..-1]
+        .map do |line|
+          line = line.split(" | ")
+          if line.length == 1
+            last_key = line.first.split(" ").last
+            hash[:attributes][last_key] = []
+          else
+            line[1] = line[1].split(" or ")
+            hash[:attributes][last_key] << line
+          end
         end
-      end
+    end
     hash
   end
 end

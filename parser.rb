@@ -29,7 +29,7 @@ puts model.delete(:description)
 puts "=" * 60
 puts model.delete(:hierarchy).join " > "
 
-model.map do |model, attrs|
+model[:attributes].map do |model, attrs|
   puts
   puts model
   puts "-" * 60
